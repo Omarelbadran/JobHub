@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:job_hub_app/auth_views/choose_screen_view/choose_screen_view.dart';
 import 'package:job_hub_app/auth_views/second_splash_screen_view/second_splash_screen_view.dart';
 import 'package:job_hub_app/widgets/custom_text_button.dart';
 import 'package:job_hub_app/widgets/dots_indicator.dart';
@@ -48,7 +49,12 @@ class FirstSplashScreenView extends StatelessWidget {
                       butName: 'Next'
                   ),
                   CustomTextButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => ChooseScreenView()
+                          ),
+                        );
+                      },
                       butName: 'Skip'
                   ),
                 ],

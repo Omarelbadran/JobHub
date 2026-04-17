@@ -24,7 +24,7 @@ class AddJobView extends StatelessWidget {
               showCustomSnackBar(context, 'Job created successfully');
               Navigator.pop(context, true);
             } else if (state is CreateJobFailure) {
-             showCustomSnackBar(context, state.error);
+              showCustomSnackBar(context, state.error);
             }
           },
           child: Builder(
@@ -40,10 +40,11 @@ class AddJobView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SettingsAppBar(
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                            title: 'Create new job'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          title: 'Create new job',
+                        ),
                         SizedBox(height: screenHeight * .01),
                         Text(
                           'Job Title',
@@ -174,16 +175,23 @@ class AddJobView extends StatelessWidget {
                             SizedBox(width: 10.w),
                             IconButton(
                               onPressed: () => cubit.addRequirement(),
-                              icon: Icon(Icons.add_circle,
-                                  color: const Color(0xFF3B67E1),
-                                  size: 35.sp),
+                              icon: Icon(
+                                Icons.add_circle,
+                                color: const Color(0xFF3B67E1),
+                                size: 35.sp,
+                              ),
                             ),
                           ],
                         ),
                         SizedBox(height: screenHeight * .01),
-                        RequirementsListWidget(
-                          requirements: cubit.requirements,
-                          onRemove: (index) => cubit.removeRequirement(index),
+                        BlocBuilder<CreateJobCubit, CreateJobState>(
+                          builder: (context, state) {
+                            return RequirementsListWidget(
+                              requirements: cubit.requirements,
+                              onRemove: (index) =>
+                                  cubit.removeRequirement(index),
+                            );
+                          },
                         ),
 
                         SizedBox(height: screenHeight * .04),
@@ -198,13 +206,18 @@ class AddJobView extends StatelessWidget {
                               onPressed: () {
                                 if (cubit.titleController.text.isNotEmpty &&
                                     cubit.companyController.text.isNotEmpty &&
-                                    cubit.descriptionController.text.isNotEmpty &&
+                                    cubit
+                                        .descriptionController
+                                        .text
+                                        .isNotEmpty &&
                                     cubit.locationController.text.isNotEmpty &&
                                     cubit.salaryController.text.isNotEmpty &&
-                                    cubit.contractPeriodController.text.isNotEmpty&&
-                                    cubit.workHoursController.text.isNotEmpty&&
-                                    cubit.imageUrlController.text.isNotEmpty
-                                ) {
+                                    cubit
+                                        .contractPeriodController
+                                        .text
+                                        .isNotEmpty &&
+                                    cubit.workHoursController.text.isNotEmpty &&
+                                    cubit.imageUrlController.text.isNotEmpty) {
                                   cubit.createJob();
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -216,7 +229,6 @@ class AddJobView extends StatelessWidget {
                               },
                               butName: 'Create Job',
                             );
-
                           },
                         ),
                         SizedBox(height: screenHeight * .03),

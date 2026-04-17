@@ -40,108 +40,110 @@ class RegisterView extends StatelessWidget {
             RegisterCubit cubit = BlocProvider.of<RegisterCubit>(context);
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 30.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome to Job-Hub!',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * .005),
-                  Text(
-                    'Fill the details to login to your account.',
-                    style: TextStyle(
-                      color: Colors.black.withValues(alpha: .4),
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * .05),
-                  CustomTextFormField(
-                    autofillHints: const [AutofillHints.username],
-                    controller: cubit.userNameController,
-                    prefixIcon: Icons.person,
-                    hintText: 'Username',
-                  ),
-                  SizedBox(height: screenHeight * .02),
-                  CustomTextFormField(
-                    autofillHints: const [AutofillHints.email],
-                    controller: cubit.emailController,
-                    prefixIcon: Icons.email_outlined,
-                    hintText: 'Email',
-                  ),
-                  SizedBox(height: screenHeight * .02),
-                  CustomTextFormField(
-                    prefixIcon: Icons.lock_outline,
-                    autofillHints: const [AutofillHints.password],
-                    controller: cubit.passwordController,
-                    obscureText: cubit.isObscure,
-                    hintText: 'Password',
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        cubit.changeObscure();
-                      },
-                      child: cubit.suffix,
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * .025),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Already have account? ",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                          fontSize: 14.sp,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'login!',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => LoginView(),
-                                  ),
-                                );
-                              },
-                          ),
-                        ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome to Job-Hub!',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  SizedBox(height: screenHeight * .025),
-                  CustomElevatedButton(
-                        butName: 'Complete Info',
-                        onPressed: () {
-                          if (
-                          cubit.userNameController.text.isNotEmpty &&
-                              cubit.emailController.text.isNotEmpty
-                          && cubit.passwordController.text.isNotEmpty
-                          ) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider.value(
-                                  value: cubit,
-                                  child: const CompleteInfoView(),
-                                ),
-                              ),
-                            );
-                          } else {
-                            showCustomSnackBar(context, "Please fill your basic info first");
-                          }
+                    SizedBox(height: screenHeight * .005),
+                    Text(
+                      'Fill the details to login to your account.',
+                      style: TextStyle(
+                        color: Colors.black.withValues(alpha: .4),
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * .05),
+                    CustomTextFormField(
+                      autofillHints: const [AutofillHints.username],
+                      controller: cubit.userNameController,
+                      prefixIcon: Icons.person,
+                      hintText: 'Username',
+                    ),
+                    SizedBox(height: screenHeight * .02),
+                    CustomTextFormField(
+                      autofillHints: const [AutofillHints.email],
+                      controller: cubit.emailController,
+                      prefixIcon: Icons.email_outlined,
+                      hintText: 'Email',
+                    ),
+                    SizedBox(height: screenHeight * .02),
+                    CustomTextFormField(
+                      prefixIcon: Icons.lock_outline,
+                      autofillHints: const [AutofillHints.password],
+                      controller: cubit.passwordController,
+                      obscureText: cubit.isObscure,
+                      hintText: 'Password',
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          cubit.changeObscure();
                         },
+                        child: cubit.suffix,
                       ),
-                ],
+                    ),
+                    SizedBox(height: screenHeight * .025),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Already have account? ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 14.sp,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: 'login!',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => LoginView(),
+                                    ),
+                                  );
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * .025),
+                    CustomElevatedButton(
+                          butName: 'Complete Info',
+                          onPressed: () {
+                            if (
+                            cubit.userNameController.text.isNotEmpty &&
+                                cubit.emailController.text.isNotEmpty
+                            && cubit.passwordController.text.isNotEmpty
+                            ) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider.value(
+                                    value: cubit,
+                                    child: const CompleteInfoView(),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              showCustomSnackBar(context, "Please fill your basic info first");
+                            }
+                          },
+                        ),
+                  ],
+                ),
               ),
             );
           },

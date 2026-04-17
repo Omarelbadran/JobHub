@@ -47,7 +47,7 @@ class ProfileView extends StatelessWidget {
                                     cubit.user!.imageUrl!.isNotEmpty
                                 ? Image.network(
                                     cubit.user!.imageUrl!,
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                   )
                                 : Icon(Icons.person),
                           ),
@@ -110,6 +110,11 @@ class ProfileView extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 shape: BoxShape.rectangle,
+                              ),
+                              child: Icon(
+                                Icons.picture_as_pdf_outlined,
+                                size: 40.sp,
+                                color: Colors.red,
                               ),
                             ),
                             SizedBox(width: screenWidth * .05),

@@ -41,13 +41,13 @@ class CreateJobCubit extends Cubit<CreateJobState> {
     if (text.isNotEmpty) {
       requirements.add(text);
       requirementController.clear();
-      emit(CreateJobInitial());
+      emit(RequirementUpdated(List.from(requirements)));
     }
   }
 
   void removeRequirement(int index) {
     requirements.removeAt(index);
-    emit(CreateJobInitial());
+    emit(RequirementUpdated(List.from(requirements)));
   }
   Future<void> createJob() async {
     if (formKey.currentState != null && !formKey.currentState!.validate()) return;

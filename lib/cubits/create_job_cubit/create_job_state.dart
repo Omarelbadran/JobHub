@@ -13,3 +13,7 @@ final class CreateJobFailure extends CreateJobState{
   final String error;
   CreateJobFailure(this.error);
 }
+final class RequirementUpdated extends CreateJobState {
+  final List<String> requirements;
+  RequirementUpdated(this.requirements);
+}
